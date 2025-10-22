@@ -13,6 +13,10 @@ class Point2D:
     @property
     def y(self) -> float:
         return self._coordinates[1]
+    
+    def __isub__(self, other: Vector) -> None:
+        self._coordinates -= other
+        return self
 
     #def __iadd__(self, other: Vector) -> None:
     #    self._coordinates += other
@@ -34,7 +38,8 @@ def test_point_vector_addition() -> None:
 
 def test_point_vector_subtraction() -> None:
     point = Point2D(1.0, 2.0)
+
     # Task B: make the test below pass (implement __isub__)
-    point -= Vector([1.1, 2.2])
+    point.__isub__(Vector([1.1, 2.2]))
     assert isclose(point.x, -0.1)
     assert isclose(point.y, -0.2)
